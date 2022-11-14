@@ -18,12 +18,12 @@
     <div class="col-xs-12">
       <div appDropdown class="btn-group">
         <button type="button" class="btn btn-primary dropdown-toggle">
-            Manage Recipe <span class="caret"></span>
+            Manage Recipe &nbsp;<span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
             <li><a style="cursor: pointer;" (click)="toShoppingList()">To Shopping List</a></li>
-            <li><a href="#">Edit Recipe</a></li>
-            <li><a href="#">Delete Recipe</a></li>
+            <li><a style="cursor: pointer;" (click)="toEditRecipe()">Edit Recipe</a></li>
+            <li><a style="cursor: pointer;">Delete Recipe</a></li>
         </ul>
       </div>
     </div>
