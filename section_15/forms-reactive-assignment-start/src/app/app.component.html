@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <!--
+          Create a Form with the following Controls and Validators
+          DONE 1) Project Name (should not be empty)
+          DONE 2) Mail (should not be a empty and a valid email)
+          DONE 3) Project Status Dropdown, with three values: 'Stable', 'Critical', 'Finished'
+          DONE 4) Submit Button
+
+          DONE Add your own Validator which doesn't allow "Test" as a Project Name
+
+          DONE Also implement that Validator as an async Validator (replace the other one)
+
+          DONE Upon submitting the form, simply print the value to the console
+      -->
+
+      <form [formGroup]="projectForm" (ngSubmit)="onCreateProject()">
+        <div class="form-group">
+          <label for="name">Project Name*</label>
+          <input
+            formControlName="projectName"
+            type="text"
+            id="name"
+            class="form-control">
+        </div>
+        <span 
+          *ngIf="!projectForm.get('projectName').valid && projectForm.get('projectName').touched"
+          class="help-block">
+          Please add a valid project name
+      </span>
+ 
+        <div class="form-group">
+          <label for="email">Email*</label>
+          <input
+            formControlName="email"
+            type="text"
+            id="email"
+            class="form-control">
+        </div>
+        <span 
+        *ngIf="!projectForm.get('email').valid && projectForm.get('email').touched"
+        class="help-block">
+        Please add a valid email
+    </span>
+
+        <div class="form-group">
+          <label for="status">Project Status</label> 
+          <select class="form-control" formControlName="status">
+            <option *ngFor="let option of projectStatuses" [id]="option" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+
+        <button 
+          class="btn btn-primary"
+          type="Submit"
+          [disabled]="!projectForm.valid">Create</button>
+      </form>
+    </div>
+  </div>
+</div>

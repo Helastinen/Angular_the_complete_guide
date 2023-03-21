@@ -29,9 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         count++;
       }, 1000);
     });
-
-    
-
+ 
     this.firstObsSubscription = customIntervalObservable.pipe(
       filter(data => {
         return data > 0;

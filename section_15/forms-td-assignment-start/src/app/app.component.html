@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-4 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit()" #form="ngForm">
+        <div class="from-group">
+          <label for="mail">Email*</label>
+          <input 
+            id="mail"  
+            type="email"
+            name="mail"
+            class="form-control"
+            required
+            ngModel
+            email
+            #mail="ngModel">
+          <div *ngIf="!mail.valid && mail.touched" class="red-text">
+            Please add a valid email address.
+          </div>
+        </div>
+
+        <div class="from-group">
+          <label for="subscription">Subscriptions
+          </label>
+          <select
+            id="subscription"  
+            name="subscription"
+            class="form-control"
+            ngModel="advanced">
+            <option value="basic">Basic</option>
+            <option value="advanced">Advanced</option>
+            <option value="pro">Pro</option>
+          </select>
+        </div>
+
+        <div class="from-group">
+          <label for="password">Password*</label>
+          <input 
+            id="password"  
+            type="password"
+            name="password"
+            class="form-control"
+            required
+            ngModel
+            password
+            #password="ngModel">
+          <div *ngIf="!password.valid && password.touched" class="red-text">
+            Please add a password.
+          </div>
+        </div>
+
+        <button 
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!form.valid">Submit</button>
+
+        <div *ngIf="!form.valid && form.touched" class="alert-text">
+           Please add all required fields in correct formats.
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+      <!-- Add a Form with the following Inputs (and Validators)
+           DONE 1) Mail address (should not be empty and should be an email address)
+           DONE. 2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced", "Pro")
+              Set "Advanced" as Default
+           DONE 3) A Password field (should not be empty)
+           DONE 4) A Submit Button
+
+           DONE Display a warning message if the Form is invalid AND was touched. 
+           DONE Display a warning message below each input if it's invalid.
+
+           DONE Upon submitting the form, you should simply print the Value of the Form to the Console.
+           Optionally, display it in your template.
+      -->
