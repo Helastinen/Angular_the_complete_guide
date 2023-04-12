@@ -1,11 +1,14 @@
+import { Subject } from 'rxjs';
 import { Ingredient } from '../shared/ingredient.model';
 import { Recipe } from './recipe.model';
 
 export class RecipeService {
+  recipesChanged = new Subject<Recipe[]>;
+
   private recipes: Recipe[] = [
     new Recipe(
       "Pasta", 
-      "Description: Delicious pasta", 
+      "Delicious pasta", 
       "https://lobsterfrommaine.com/wp-content/uploads/fly-images/1577/20210517-Pasta-alla-Gricia-with-Lobster3010-2048x576-c.jpg",
       [
         new Ingredient('Fettucini', 1),
@@ -29,5 +32,20 @@ export class RecipeService {
 
   getRecipe(index: number) {
     return this.recipes[index];
+  }
+
+  addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  updateRecipe(index: number, updatedRecipe: Recipe) {
+    this.recipes[index] = updatedRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
+    this.recipesChanged.next(this.recipes.slice());
   }
 }
