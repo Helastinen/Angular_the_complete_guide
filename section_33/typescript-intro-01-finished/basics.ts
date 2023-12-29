@@ -75,7 +75,7 @@ const stringArray = insertAtBeginning(['a', 'b', 'c'], 'd');
 
 const anyArray = insertAtEnd(demoArray, -1); // [1, 2, 3, -1]
 /* I might wanna do things with that array which I can do with an array full of numbers.
-But the problem is that updatedArray, if I hover over it, is inferred to be of type any array, 
+But the problem is that the anyArray, if I hover over it, is inferred to be of type any array, 
 so an array full of any kind of values.
 TypeScript here doesn't pick up that it's an array full of numbers. Why? Because here I have any as a type.*/
 const anyArray2 = insertAtEnd(['a', 'b', 'c'], 'd');
@@ -128,8 +128,8 @@ max = {
 };
 
 class Instructor implements Human {
-  firstName: string;
-  age: number;
+  firstName!: string;
+  age!: number;
   greet() {
     console.log('Hello!!!!');
   }

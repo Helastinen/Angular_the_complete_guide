@@ -1,4 +1,3 @@
-import { NumberSymbol } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval, Subscription, Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
@@ -9,47 +8,47 @@ import { map, filter } from 'rxjs/operators';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  private firstObsSubscription: Subscription;
+  private firstSub: Subscription;
   constructor() { }
 
   ngOnInit() {
-    // this.firstObsSubscription = interval(1000).subscribe(count => {
-    //   console.log("count: ", count);
-    // })
-    const customIntervalObservable = Observable.create(observer => {
+    /* this.firstSub = interval(1000).subscribe(count => {
+      console.log("count: " + count);
+    });*/
+
+    const customIntervalObservable = new Observable(observer => {
       let count = 0;
       setInterval(() => {
         observer.next(count);
-        if (count === 2) {
+        if (count === 7) {
           observer.complete();
         }
         if (count > 3) {
-          observer.error(new Error('Count is greater than 3!'));
+          observer.error(new Error("Count greater than three!"));
         }
         count++;
       }, 1000);
     });
- 
-    this.firstObsSubscription = customIntervalObservable.pipe(
-      filter(data => {
-        return data > 0;
+
+    this.firstSub = customIntervalObservable.pipe(
+      filter((data: number) => {
+        return data % 2 === 0;
       }),
-      map( (data: number) => {
+      map((data: number) => {
         return 'Round: ' + (data + 1);
-      }))
-      .subscribe(data => {
-        console.log(data);
-      }, error => {
-        console.log(error);
-        alert(error.message);   
-      }, () => {
-        console.log('Completed!');
-      }
-    );
+      })
+    ).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+      alert(error.message);
+    }, () => {
+      console.log("completed!");
+    });
   }
 
   ngOnDestroy() {
-    this.firstObsSubscription.unsubscribe();
+    this.firstSub.unsubscribe();
   }
 
 }

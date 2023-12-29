@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../user.service';
 
@@ -21,6 +21,8 @@ export class UserComponent implements OnInit {
   }
 
   onActivated() {
+    // using eventEmitter pattern
+    // this.userService.activatedEmitter.emit(true);
     this.userService.activatedEmitter.next(true);
   };
 }
